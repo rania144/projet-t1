@@ -19,8 +19,8 @@ Le déploiement fonctionne comme suit :
 - **playbook firewall** :Ce playbook Ansible installe et configure le pare-feu UFW sur tous les hôtes en autorisant les connexions SSH, HTTP et HTTPS, puis l’active automatiquement.
 - **playbook update** :Ce playbook Ansible met à jour la liste des paquets disponibles puis effectue une mise à niveau complète (dist-upgrade) de tous les paquets installés sur tous les serveurs ciblés.
 - **playbook deploy_app.yml**:Ce playbook installe un serveur Nginx, y déploie une page HTML personnalisée pour ARCData, et garantit que le service web est actif et persistant, facilitant ainsi le déploiement rapide d’un site statique sur plusieurs machines.
-
-- **Résumé de l’enchaînement des playbooks**
+  
+ **Résumé de l’enchaînement des playbooks**
 **Sécurisation du serveur avec le playbook UFW**
 Le premier playbook installe et configure le pare-feu UFW pour autoriser uniquement le trafic nécessaire (SSH, HTTP, HTTPS) et bloquer tout le reste. Cela garantit que le serveur est protégé dès le départ.
 
