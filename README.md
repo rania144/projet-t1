@@ -43,26 +43,7 @@ Ensuite, il génère une paire de clés SSH **RSA** de 4096 bits localement à l
 Enfin, la clé privée correspondante est sauvegardée localement dans un fichier sécurisé nommé *"conexionnn.pem"* avec des permissions restreintes, permettant à l'utilisateur d'accéder en SSH aux instances EC2 créées avec cette paire de clés.
 
 ## instances.tf
-Ce code Terraform déploie une architecture AWS comprenant un **load balancer**, une **instance bastion**, et plusieurs **instances applicatives**, tout en configurant leur interconnexion.
+Ce code Terraform déploie une architecture AWS complète comprenant un Application Load Balancer (ALB) public nommé "loadbalancer-unique-14" qui répartit le trafic HTTP sur le port 80 entre plusieurs instances applicatives. Le load balancer est configuré dans deux sous-réseaux publics et associé à un groupe de sécurité dédié. Une instance bastion `t2.micro` est également lancée dans un subnet public pour permettre un accès sécurisé aux ressources privées via SSH, en utilisant une clé SSH préalablement créée. Cette instance bastion reçoit un fichier de clé privée avec les permissions sécurisées et exécute un script d'initialisation au démarrage. Trois instances applicatives identiques sont déployées dans un subnet privé, sans adresse IP publique, et attachées à un groupe cible du load balancer qui effectue des vérifications de santé pour ne router le trafic qu’aux instances opérationnelles. Enfin, un listener HTTP sur le port 80 est configuré sur le load balancer pour transmettre les requêtes au groupe cible. Cette architecture garantit une répartition du trafic efficace et sécurisée entre les instances applicatives tout en contrôlant l’accès via la bastion.
 
-- **Load Balancer (ALB)** :  
-  Il crée un *Application Load Balancer* public nommé `"loadbalancer-unique-14"` qui répartit le trafic HTTP entrant sur le port 80. Le load balancer est placé dans deux sous-réseaux publics (subnets) et associé à un groupe de sécurité spécifique. La protection contre la suppression accidentelle est désactivée.
-
-- **Instance Bastion** :  
-  Une instance EC2 `t2.micro` est lancée dans un subnet public, servant de point d’accès sécurisé (bastion host) pour se connecter aux autres instances privées. Elle utilise une AMI spécifique et la clé SSH `"conexionnn-new"` générée précédemment. Le fichier de clé privée SSH est copié sur cette instance via un provisioner, et les permissions de ce fichier sont sécurisées. Un script utilisateur (`userdata.sh`) est exécuté au démarrage pour configurer l’instance.
-
-- **Instances Applicatives** :  
-  Trois instances EC2 `t2.micro` sont lancées dans un subnet privé, sans adresse IP publique. Elles utilisent la même AMI et la clé SSH `"conexionnn-new"`. Chaque instance reçoit un nom distinct (application-1, application-2, application-3) via la variable `count`.
-
-- **Target Group** :  
-  Un groupe cible est créé pour le load balancer, qui écoute sur le port 80 en HTTP, dans le VPC principal. Il inclut une configuration de vérification de santé pour s’assurer que seules les instances saines reçoivent le trafic.
-
-- **Listener Load Balancer** :  
-  Le listener est configuré pour écouter les requêtes HTTP sur le port 80 et pour transférer le trafic vers le groupe cible.
-
-- **Attachement au Target Group** :  
-  Les trois instances applicatives sont attachées au groupe cible, ce qui permet au load balancer de distribuer les requêtes HTTP entre elles.
-
-En résumé, ce code met en place une architecture réseau sécurisée avec un point d’entrée via un load balancer public, des instances applicatives privées derrière, et une instance bastion pour gérer l’accès sécurisé à l’environnement.
 
 
