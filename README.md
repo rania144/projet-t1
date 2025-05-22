@@ -76,10 +76,8 @@ Les fichiers Terraform `main.tf`, `Security.tf`, `Instances.tf` et `reseau.tf` c
   - Bastion : **SSH (port 22)** depuis une IP précise.
   - Load Balancer : **HTTP (port 80)** depuis l’extérieur.
   - Instances privées : Connexions **internes** uniquement.
-  - Base de données : Connexions **MySQL (port 3306)** depuis les instances applicatives.
 
-- **`Instances.tf`** : Déploie les **ressources de calcul** : un **bastion** pour accéder aux instances privées, un **ALB** pour gérer le trafic HTTP vers 3 instances EC2 privées, et une **base de données RDS MariaDB** dans les sous-réseaux privés. Utilisation d’un **Target Group** et **Listener** pour la répartition du trafic.
-
+- **`Instances.tf`** : Déploie les **ressources de calcul** : un **bastion** pour accéder aux instances privées, un **ALB** pour gérer le trafic HTTP vers 3 instances EC2 privées.
 ---
 
 
