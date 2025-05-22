@@ -1,0 +1,24 @@
+- name: Déployer un site web pour ARCData
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Installer nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Copier la page HTML pour ARCData
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: S'assurer que nginx est démarré et activé
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: yes
