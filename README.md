@@ -65,6 +65,7 @@ Pour les sous-réseaux privés, une passerelle NAT avec une adresse IP élastiqu
 
 Ainsi, ce code établit une infrastructure réseau sécurisée et scalable, en séparant les ressources publiques accessibles directement d’Internet des ressources privées protégées tout en leur permettant un accès sortant contrôlé.
 
+## Liens entre les 4 fichiers Terraform
 Les fichiers Terraform `main.tf`, `Security.tf`, `Instances.tf` et `reseau.tf` créent une infrastructure Cloud sécurisée sur AWS pour l'application **arcdata**, avec une architecture hautement disponible et segmentée.
 
 - **`main.tf`** : Déclare le **VPC** (réseau privé) et configure la base SSH pour un accès sécurisé. Ce fichier sert de point d’entrée principal pour la création des ressources dans AWS.
