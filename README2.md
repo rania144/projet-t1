@@ -15,3 +15,13 @@ Cette documentation décrit le processus d'automatisation du déploiement d'une 
 Le déploiement fonctionne comme suit :
 
 - **Inventaire Dynamique** : Utilisation du fichier `aws_ec2.yml` pour interroger l'API AWS et récupérer dynamiquement les instances EC2 correspondant à des critères spécifiques (tag Name).
+- **playbook fail2ban**  :Ce playbook Ansible installe fail2ban sur tous les hôtes et s'assure qu'il est redémarré et activé au démarrage du système.
+- **playbook firewall** :Ce playbook Ansible installe et configure le pare-feu UFW sur tous les hôtes en autorisant les connexions SSH, HTTP et HTTPS, puis l’active automatiquement.
+
+
+
+
+
+
+
+
