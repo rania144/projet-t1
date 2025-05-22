@@ -72,7 +72,7 @@ Les fichiers Terraform `main.tf`, `Security.tf`, `Instances.tf` et `reseau.tf` c
 
 - **`reseau.tf`** : Déploie la **topologie réseau**, créant des sous-réseaux publics (pour le bastion et le Load Balancer) et privés (pour les instances et la base de données), avec des tables de routage pour un accès sécurisé via **Internet Gateway** et **NAT Gateway**.
 
-- **`Security_group.tf`** : Configure les **groupes de sécurité** :
+- **`Security.tf`** : Configure les **groupes de sécurité** :
   - Bastion : **SSH (port 22)** depuis une IP précise.
   - Load Balancer : **HTTP (port 80)** depuis l’extérieur.
   - Instances privées : Connexions **internes** uniquement.
