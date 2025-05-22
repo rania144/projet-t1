@@ -33,3 +33,8 @@ Pour détruire l'infrastructure déployer par Terraform rentrer la commande suiv
  ```bash
         terraform destroy
   ```
+Ce fichier Terraform configure une infrastructure AWS basique. Il crée d'abord un **VPC** (Virtual Private Cloud) nommé *"main-vpc"* avec une plage d'adresses IP privées (`10.0.0.0/16`) et active la résolution DNS pour permettre aux ressources internes de se connecter via des noms DNS. 
+
+Ensuite, il génère une paire de clés SSH **RSA** de 4096 bits localement à l'aide du provider **TLS**, puis importe la clé publique dans AWS sous le nom *"conexionnn-new"* pour pouvoir l'utiliser lors du lancement d'instances EC2. 
+
+Enfin, la clé privée correspondante est sauvegardée localement dans un fichier sécurisé nommé *"conexionnn.pem"* avec des permissions restreintes, permettant à l'utilisateur d'accéder en SSH aux instances EC2 créées avec cette paire de clés.
