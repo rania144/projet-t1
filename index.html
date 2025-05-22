@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARC Data Shield - Cybersécurité Industrielle</title>
+  <style>
+    /* Reset et base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    header {
+      background: linear-gradient(90deg, #0284c7, #0ea5e9);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.5);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+    }
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      color: #38bdf8;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #38bdf8;
+      padding-bottom: 0.25rem;
+    }
+    p {
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+    ul.services {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1rem;
+    }
+    ul.services li {
+      background: #1e293b;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(2,132,199,0.4);
+      transition: transform 0.3s ease;
+    }
+    ul.services li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(2,132,199,0.7);
+    }
+    footer {
+      background: #0e1729;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+    }
+    a.btn {
+      display: inline-block;
+      background-color: #0284c7;
+      color: #f8fafc;
+      padding: 0.75em 1.75em;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 6px 15px rgba(2, 132, 199, 0.6);
+      transition: background-color 0.3s ease;
+    }
+    a.btn:hover {
+      background-color: #0369a1;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      ul.services {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ARC Data Shield</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Votre partenaire en cybersécurité industrielle</h2>
+      <p>ARC Data Shield conçoit des solutions innovantes pour protéger vos infrastructures critiques contre les cyberattaques. Nos passerelles Digital Air Gap assurent une isolation sécurisée entre vos réseaux IT et OT, garantissant la résilience de vos systèmes industriels.</p>
+      <a href="https://www.arc-data-shield.fr" target="_blank" class="btn">En savoir plus</a>
+    </section>
+    <section>
+      <h2>Nos services</h2>
+      <ul class="services">
+        <li><strong>Passerelles Digital Air Gap</strong><br>Isolation forte des réseaux industriels.</li>
+        <li><strong>Protection contre les ransomwares</strong><br>Solutions avancées pour prévenir les attaques.</li>
+        <li><strong>Développement 100% français</strong><br>Maîtrise totale de la chaîne de production.</li>
+        <li><strong>Conseil et accompagnement</strong><br>Expertise en cybersécurité adaptée à vos besoins.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 ARC Data Shield — Tous droits réservés
+  </footer>
+</body>
+</html>

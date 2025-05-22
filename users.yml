@@ -1,0 +1,22 @@
+---
+- name: Gestion des utilisateurs
+  hosts: all
+  become: yes
+
+  vars:
+    admin_user: "adminuser"
+    admin_ssh_key: "ssh-rsa AAAA... ton_clef_publique ... user@domain"
+
+  tasks:
+    - name: Créer un utilisateur admin
+      ansible.builtin.user:
+        name: "{{ admin_user }}"
+        state: present
+        groups: sudo
+        append: yes
+        shell: /bin/bash
+
+    - name: Autoriser l’accès SSH avec clé publique
+      ansible.builtin.authorized_key:
+        user: "{{ admin_user }}"
+        key: "{{ admin_ssh_key }}"

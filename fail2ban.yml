@@ -1,0 +1,17 @@
+---
+- name: Installer et configurer fail2ban
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Installer fail2ban
+      ansible.builtin.apt:
+        name: fail2ban
+        state: present
+        update_cache: yes
+
+    - name: Redémarrer fail2ban
+      ansible.builtin.systemd:
+        name: fail2ban
+        state: restarted
+        enabled: yes
