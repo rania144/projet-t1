@@ -17,12 +17,14 @@ resource "aws_lb" "load_balancer" {
 
 # Instance EC2 Bastion
 resource "aws_instance" "bastion" {
-  ami                         = "ami-084568db4383264d4" # à remplacer si besoin
+  ami                         = "ami-084568db4383264d4"
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.public_subnet_bastion.id
   vpc_security_group_ids      = [aws_security_group.bastion_security_group.id]
   associate_public_ip_address = true
-  key_name                    = "conexionnn-new"  # cohérent avec aws_key_pair
+  key_name                    = "conexionnn-new"
+
+  user_data = file("${path.module}/userdata.sh")
 
   provisioner "file" {
     source      = "${path.module}/conexionnn.pem"
@@ -36,9 +38,25 @@ resource "aws_instance" "bastion" {
     }
   }
 
+  provisioner "file" {
+    source      = "${path.module}/ansible_files.tar.gz"
+    destination = "/home/ubuntu/ansible_files.tar.gz"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = tls_private_key.conexionnn.private_key_pem
+      host        = self.public_ip
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "chmod 600 /home/ubuntu/.ssh/conexionnn.pem"
+      "mkdir -p /home/ubuntu/ansible",
+      "tar -xzf /home/ubuntu/ansible_files.tar.gz -C /home/ubuntu/ansible",
+      "chmod -R 755 /home/ubuntu/ansible",
+      "chmod 600 /home/ubuntu/.ssh/conexionnn.pem",
+      "chown -R ubuntu:ubuntu /home/ubuntu/ansible /home/ubuntu/.ssh"
     ]
 
     connection {
@@ -49,8 +67,6 @@ resource "aws_instance" "bastion" {
     }
   }
 
-  user_data = file("${path.module}/userdata.sh")
-
   tags = {
     Name = "bastion"
   }
@@ -58,13 +74,13 @@ resource "aws_instance" "bastion" {
 
 # Trois instances EC2 Application
 resource "aws_instance" "application" {
-  count                    = 3
-  ami                      = "ami-084568db4383264d4"
-  instance_type            = "t2.micro"
-  subnet_id                = aws_subnet.private_subnet1.id
-  vpc_security_group_ids   = [aws_security_group.application_security_group.id]
-  associate_public_ip_address = false
-  key_name                 = "conexionnn-new"
+  count                         = 3
+  ami                           = "ami-084568db4383264d4"
+  instance_type                 = "t2.micro"
+  subnet_id                     = aws_subnet.private_subnet1.id
+  vpc_security_group_ids        = [aws_security_group.application_security_group.id]
+  associate_public_ip_address   = false
+  key_name                      = "conexionnn-new"
 
   tags = {
     Name = "application-${count.index + 1}"
