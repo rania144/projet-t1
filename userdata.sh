@@ -1,16 +1,26 @@
 #!/bin/bash
+# Mettre à jour les paquets
+sudo apt update
 
-# Mettre à jour la liste des paquets
-apt-get update -y
+# Installer Ansible (core)
+sudo apt install ansible-core -y
 
-# Installer les dépendances nécessaires pour ajouter un PPA
-apt-get install -y software-properties-common
+# Créer le dossier Ansible s'il n'existe pas
+mkdir -p /home/ubuntu/ansible
 
-# Ajouter le dépôt officiel d'Ansible
-apt-add-repository --yes --update ppa:ansible/ansible
+# Déplacer les fichiers dans le dossier ansible
+mv /home/ubuntu/terraform/data/ansible.cfg \
+   /home/ubuntu/terraform/data/aws_ec2.yml \
+   /home/ubuntu/terraform/data/deploy_app.yml \
+   /home/ubuntu/terraform/data/fail2ban.yml \
+   /home/ubuntu/terraform/data/firewall.yml \
+   /home/ubuntu/terraform/data/index.html \
+   /home/ubuntu/terraform/data/update.yml \
+   /home/ubuntu/terraform/data/users.yml \
+   /home/ubuntu/ansible/
 
-# Installer Ansible
-apt-get install -y ansible
+# Sécuriser les permissions
+sudo chown -R ubuntu:ubuntu /home/ubuntu/ansible /home/ubuntu/.ssh
+sudo chmod 755 /home/ubuntu/ansible
+sudo chmod 600 /home/ubuntu/.ssh/conexionnn.pem
 
-# Vérifier l'installation (optionnel)
-ansible --version
